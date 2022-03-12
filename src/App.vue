@@ -6,10 +6,14 @@ const items = ref([
   {id: 2, label: "1 potato"},
   {id: 3, label: "3 Serrano chiles"}
 ])
+const newItem = ref("")
 </script>
 
 <template>
   <h1>{{header}}</h1>
+  <input v-model.trim="newItem" type="text" placeholder="Add an item">
+  <br />
+  {{newItem}}
   <ul>
     <li v-for="({id, label}, /* index */) in items" :key="id">{{label}}</li>
   </ul>
