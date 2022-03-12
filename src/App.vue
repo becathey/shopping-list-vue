@@ -1,10 +1,18 @@
 <script setup>
 import {ref} from 'vue'
 const header = ref('Shopping List')
+const items = ref([
+  {id: 1, label: "1 lb chicken"},
+  {id: 2, label: "1 potato"},
+  {id: 3, label: "3 Serrano chiles"}
+])
 </script>
 
 <template>
   <h1>{{header}}</h1>
+  <ul>
+    <li v-for="({id, label}, index) in items" :key="id">{{label}}</li>
+  </ul>
 </template>
 
 <style>
@@ -17,7 +25,24 @@ const header = ref('Shopping List')
   font-weight: normal;
 }
 h1 {
-  color: #3d4852;
+  color: hsl(210, 20%, 30%);
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  display: flex;
+  align-items: center;
+  line-height: 1.75;
+  letter-spacing: 0.5px;
+  color: hsl(210, 20%, 30%);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+}
+li:hover {
+  color: hsl(210, 10%, 10%);
 }
 
 @media (min-width: 1024px) {
