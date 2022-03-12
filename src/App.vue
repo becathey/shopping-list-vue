@@ -11,7 +11,7 @@ const items = ref([
 <template>
   <h1>{{header}}</h1>
   <ul>
-    <li v-for="({id, label}, index) in items" :key="id">{{label}}</li>
+    <li v-for="({id, label}, /* index */) in items" :key="id">{{label}}</li>
   </ul>
 </template>
 
