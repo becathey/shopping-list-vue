@@ -7,13 +7,18 @@ const items = ref([
   {id: 3, label: "3 Serrano chiles"}
 ])
 const newItem = ref("")
+const newItemHighPriority = ref(false)
 </script>
 
 <template>
   <h1>{{header}}</h1>
   <input v-model.trim="newItem" type="text" placeholder="Add an item">
-  <br />
-  {{newItem}}
+  <div>{{newItem}}</div>
+    <label>
+      <input type="checkbox" v-model="newItemHighPriority">
+      High Priority
+    </label>
+
   <ul>
     <li v-for="({id, label}, /* index */) in items" :key="id">{{label}}</li>
   </ul>
@@ -47,6 +52,11 @@ li {
 }
 li:hover {
   color: hsl(210, 10%, 10%);
+}
+input[type="checkbox"] {
+  display: inline !important;
+  width: auto;
+  box-shadow: none;
 }
 
 @media (min-width: 1024px) {
