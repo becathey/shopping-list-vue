@@ -12,13 +12,15 @@ const newItemHighPriority = ref(false)
 
 <template>
   <h1>{{header}}</h1>
+  <div class="add-item-form">
   <input v-model.trim="newItem" type="text" placeholder="Add an item">
-  <div>{{newItem}}</div>
     <label>
       <input type="checkbox" v-model="newItemHighPriority">
       High Priority
     </label>
-
+    <button v-on:click="items.push({id: items.length + 1, label: newItem})"
+    class="btn btn-primary">Save Item</button>
+  </div>
   <ul>
     <li v-for="({id, label}, /* index */) in items" :key="id">{{label}}</li>
   </ul>
@@ -52,6 +54,41 @@ li {
 }
 li:hover {
   color: hsl(210, 10%, 10%);
+}
+.btn {
+  border: none;
+  border-radius: 3px;
+  margin: auto 0;
+  padding: 0.5rem 0.75rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  transition: all 0.1s ease-in;
+}
+.btn-primary {
+  background: hsl(210, 80%, 70%);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: hsl(210, 70%, 50%);
+}
+.add-item-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-item-form input {
+  width: 70%;
+  box-sizing: border-box;
+  border: 1px solid hsl(210, 30%, 90%);
+  border-radius: 3px;
+  color: hsl(210, 10%, 40%);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
 }
 input[type="checkbox"] {
   display: inline !important;
