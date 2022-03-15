@@ -38,7 +38,9 @@ const doEdit = (e) => {
       <input type="checkbox" v-model="newItemHighPriority">
       High Priority
     </label>
-    <button class="btn btn-primary">Save Item</button>
+    <button 
+      :disabled="newItem.length < 5"
+      class="btn btn-primary">Save Item</button>
   </form>
   <ul>
     <li v-for="({id, label}, /* index */) in items" :key="id">{{label}}</li>
@@ -85,6 +87,12 @@ li:hover {
   font-size: 0.9rem;
   letter-spacing: 0.5px;
   transition: all 0.1s ease-in;
+}
+.btn[disabled] {
+  background: hsl(210, 10%, 60%);
+}
+.btn[disabled]:hover {
+  background: hsl(210, 10%, 40%);
 }
 .btn-primary {
   background: hsl(210, 80%, 70%);
