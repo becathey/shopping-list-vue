@@ -2,21 +2,31 @@
 import {ref} from 'vue'
 const header = ref('Shopping List')
 const items = ref([
-  {id: 1, label: "1 lb chicken"},
-  {id: 2, label: "1 potato"},
-  {id: 3, label: "3 Serrano chiles"}
+  // {id: 1, label: "1 lb chicken"},
+  // {id: 2, label: "1 potato"},
+  // {id: 3, label: "3 Serrano chiles"}
 ])
 const newItem = ref("")
 const newItemHighPriority = ref(false)
+const editing = ref(false)
 const saveItem = () => {
   items.value.push({id: items.value.length + 1, label: newItem.value})
+  newItem.value = ""
+}
+const doEdit = (e) => {
+  editing.value = e
   newItem.value = ""
 }
 </script>
 
 <template>
-  <h1>{{header}}</h1>
+  <div class="header">
+    <h1>{{header}}</h1>
+    <button v-if="editing" @click="doEdit(false)" class="btn">Cancel</button>
+    <button v-else @click="doEdit(true)" class="btn btn-primary">Add Item</button>
+  </div>
   <form 
+    v-if="editing"
     class="add-item-form"
     @submit.prevent="saveItem"
   >
@@ -33,6 +43,7 @@ const saveItem = () => {
   <ul>
     <li v-for="({id, label}, /* index */) in items" :key="id">{{label}}</li>
   </ul>
+  <p v-if="!items.length">Nothing to see here!</p>
 </template>
 
 <style>
@@ -82,7 +93,7 @@ li:hover {
 .btn-primary:hover {
   background: hsl(210, 70%, 50%);
 }
-.add-item-form {
+.add-item-form, .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
