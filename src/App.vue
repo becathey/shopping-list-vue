@@ -2,9 +2,9 @@
 import {ref} from 'vue'
 const header = ref('Shopping List')
 const items = ref([
-  // {id: 1, label: "1 lb chicken"},
-  // {id: 2, label: "1 potato"},
-  // {id: 3, label: "3 Serrano chiles"}
+  {id: 1, label: "1 lb chicken", purchased: true},
+  {id: 2, label: "1 potato", purchased: true},
+  {id: 3, label: "3 Serrano chiles", purchased: false}
 ])
 const newItem = ref("")
 const newItemHighPriority = ref(false)
@@ -43,7 +43,11 @@ const doEdit = (e) => {
       class="btn btn-primary">Save Item</button>
   </form>
   <ul>
-    <li v-for="({id, label}, /* index */) in items" :key="id">{{label}}</li>
+    <li 
+      v-for="({id, label, purchased}, /* index */) in items" 
+      :key="id"
+      :class="{strikeout: purchased}"
+    >{{label}}</li>
   </ul>
   <p v-if="!items.length">Nothing to see here!</p>
 </template>
@@ -122,6 +126,13 @@ input[type="checkbox"] {
   display: inline !important;
   width: auto;
   box-shadow: none;
+}
+.strikeout {
+  text-decoration: line-through;
+  color: hsl(210, 20%, 80%);
+}
+.strikeout:hover {
+  color: hsl(210, 10%, 60%);
 }
 
 @media (min-width: 1024px) {
