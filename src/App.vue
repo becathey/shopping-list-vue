@@ -17,6 +17,9 @@ const doEdit = (e) => {
   editing.value = e
   newItem.value = ""
 }
+const togglePurchased = (item) => {
+  item.purchased = !item.purchased
+}
 </script>
 
 <template>
@@ -44,10 +47,11 @@ const doEdit = (e) => {
   </form>
   <ul>
     <li 
-      v-for="({id, label, purchased, highPriority}, /* index */) in items" 
-      :key="id"
-      :class="{strikeout: purchased, priority: highPriority}"
-    >{{label}}</li>
+      v-for="(item, /* index */) in items" 
+      @click="togglePurchased(item)"
+      :key="item.id"
+      :class="{strikeout: item.purchased, priority: item.highPriority}"
+    >{{item.label}}</li>
   </ul>
   <p v-if="!items.length">Nothing to see here!</p>
 </template>
