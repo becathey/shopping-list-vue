@@ -1,11 +1,7 @@
 <script setup>
 import {ref, computed} from 'vue'
 const header = ref('Shopping List')
-const items = ref([
-  // {id: 1, label: "1 lb chicken", purchased: true, highPriority: false},
-  // {id: 2, label: "1 potato", purchased: true, highPriority: false},
-  // {id: 3, label: "3 Serrano chiles", purchased: false, highPriority: true}
-])
+const items = ref([])
 const reversedItems = computed(() => [...items.value].reverse())
 const newItem = ref("")
 const newItemHighPriority = ref(false)
@@ -62,6 +58,7 @@ const togglePurchased = (item) => {
       :class="{strikeout: item.purchased, priority: item.highPriority}"
     >{{item.label}}</li>
   </ul>
+  <p v-if="items.length > 0" class="click-notice">Click items to mark as purchased.</p>
   <p v-if="!items.length">List is currently empty!</p>
 </template>
 
@@ -93,6 +90,12 @@ li {
 }
 li:hover {
   color: hsl(210, 10%, 10%);
+}
+p {
+  margin-top: 1rem;
+}
+.click-notice {
+  font-style: italic;
 }
 .btn {
   border: none;
