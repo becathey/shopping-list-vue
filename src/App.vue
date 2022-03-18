@@ -1,11 +1,12 @@
 <script setup>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 const header = ref('Shopping List')
 const items = ref([
   {id: 1, label: "1 lb chicken", purchased: true, highPriority: false},
   {id: 2, label: "1 potato", purchased: true, highPriority: false},
   {id: 3, label: "3 Serrano chiles", purchased: false, highPriority: true}
 ])
+const reversedItems = computed(() => [...items.value].reverse())
 const newItem = ref("")
 const newItemHighPriority = ref(false)
 const editing = ref(false)
@@ -53,7 +54,7 @@ const togglePurchased = (item) => {
   </form>
   <ul>
     <li 
-      v-for="(item, /* index */) in items" 
+      v-for="(item, /* index */) in reversedItems" 
       @click="togglePurchased(item)"
       :key="item.id"
       :class="{strikeout: item.purchased, priority: item.highPriority}"
