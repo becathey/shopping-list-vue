@@ -2,9 +2,9 @@
 import {ref, computed} from 'vue'
 const header = ref('Shopping List')
 const items = ref([
-  {id: 1, label: "1 lb chicken", purchased: true, highPriority: false},
-  {id: 2, label: "1 potato", purchased: true, highPriority: false},
-  {id: 3, label: "3 Serrano chiles", purchased: false, highPriority: true}
+  // {id: 1, label: "1 lb chicken", purchased: true, highPriority: false},
+  // {id: 2, label: "1 potato", purchased: true, highPriority: false},
+  // {id: 3, label: "3 Serrano chiles", purchased: false, highPriority: true}
 ])
 const reversedItems = computed(() => [...items.value].reverse())
 const newItem = ref("")
@@ -40,10 +40,11 @@ const togglePurchased = (item) => {
     class="add-item-form"
     @submit.prevent="saveItem"
   >
-  <input 
-  v-model.trim="newItem" 
-  type="text" 
-  placeholder="Add an item">
+    <input 
+      v-model.trim="newItem" 
+      type="text" 
+      placeholder="Add an item"
+    >
     <label>
       <input type="checkbox" v-model="newItemHighPriority">
       High Priority
@@ -52,6 +53,7 @@ const togglePurchased = (item) => {
       :disabled="newItem.length < 5"
       class="btn btn-primary">Save Item</button>
   </form>
+
   <ul>
     <li 
       v-for="(item, /* index */) in reversedItems" 
@@ -60,7 +62,7 @@ const togglePurchased = (item) => {
       :class="{strikeout: item.purchased, priority: item.highPriority}"
     >{{item.label}}</li>
   </ul>
-  <p v-if="!items.length">Nothing to see here!</p>
+  <p v-if="!items.length">List is currently empty!</p>
 </template>
 
 <style>
@@ -95,7 +97,7 @@ li:hover {
 .btn {
   border: none;
   border-radius: 3px;
-  margin: auto 0;
+  margin: auto 1rem;
   padding: 0.5rem 0.75rem;
   flex-shrink: 0;
   cursor: pointer;
@@ -132,6 +134,9 @@ li:hover {
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   letter-spacing: 0.5px;
+}
+input[type="text"] {
+  margin-right: 1rem;
 }
 input[type="checkbox"] {
   display: inline !important;
