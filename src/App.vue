@@ -52,7 +52,7 @@ const togglePurchased = (item) => {
 
   <ul>
     <li 
-      v-for="(item, /* index */) in reversedItems" 
+      v-for="item in reversedItems" 
       @click="togglePurchased(item)"
       :key="item.id"
       :class="{strikeout: item.purchased, priority: item.highPriority}"
